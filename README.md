@@ -2,6 +2,11 @@
 
 **ConvertHub — By Binary Studios** is a premium, privacy-first file conversion workspace.
 
+## Latest workspace UI
+- Emerald Luxe palette in light and dark modes.
+- Centered liquid-glass quick-navigation dock with a separate search action; it is fixed to the viewport and remains visible while scrolling.
+- Dock shortcuts jump to the workspace, conversion tools, and file queue.
+
 ## Platform builds
 - **Free cloud build route:** Azure Pipelines is configured in `azure-pipelines.yml` to build the Android APK and Windows portable/installer EXEs. It is separate from GitHub Actions, which may be unavailable on accounts with billing restrictions.
 - **Setup:** Sign in to Azure DevOps, create a project, choose Pipelines → New pipeline → GitHub → select this repository → Existing Azure Pipelines YAML file → `/azure-pipelines.yml`, authorize the GitHub connection, and run it.
