@@ -3,8 +3,10 @@
 **ConvertHub — By Binary Studios** is a premium, privacy-first file conversion workspace.
 
 ## Platform builds
-- **Windows:** NSIS installer (`ConvertHub-Setup-0.1.0.exe`) — Windows CI workflow.
-- **Android test APK:** build workflow creates a debug APK for phone testing. Open the [Android APK workflow](https://github.com/BARONWILLIAMS1/converthub-desktop-/actions/workflows/android-apk.yml), select the latest successful run, and download the `ConvertHub-Android-APK` artifact. GitHub requires you to be signed in to download workflow artifacts. Tag releases (`v*`) also attach the APK to the GitHub Release.
+- **Free cloud build route:** Azure Pipelines is configured in `azure-pipelines.yml` to build the Android APK and Windows portable/installer EXEs. It is separate from GitHub Actions, which may be unavailable on accounts with billing restrictions.
+- **Setup:** Sign in to Azure DevOps, create a project, choose Pipelines → New pipeline → GitHub → select this repository → Existing Azure Pipelines YAML file → `/azure-pipelines.yml`, authorize the GitHub connection, and run it.
+- **Downloads:** Open a successful pipeline run and download `ConvertHub-APK` or `ConvertHub-Windows` under Artifacts. The Android artifact is a debug APK for testing; the Windows artifact contains the portable EXE and setup installer.
+- Azure DevOps free build allocations depend on project visibility and account eligibility; no paid upgrade is required for the intended free setup.
 
 ## Prototype features
 - Drag-and-drop and multi-file queue
