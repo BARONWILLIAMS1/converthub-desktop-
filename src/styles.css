@@ -50,3 +50,18 @@ button:not(:disabled):active{transform:scale(.97)}.outline:hover{border-color:#c
 .file:has(.status.processing){background:linear-gradient(90deg,var(--panel),#c8b28e0a,var(--panel));background-size:200% 100%;animation:hub-sweep 2s linear infinite}
 .file:has(.status:not(.processing)):has(.status.failed){background:#c66d6410}
 @media(prefers-reduced-motion:reduce){.button-spinner,.mini-spinner,.loader-orb,.processing-panel:after,.progress-track i{animation:none!important}}
+
+/* Animated brand boot splash */
+@keyframes splash-mark-in{0%{opacity:0;transform:translateY(12px) scale(.82)}65%{opacity:1;transform:translateY(-2px) scale(1.04)}100%{transform:translateY(0) scale(1)}}
+@keyframes splash-track{0%{width:0}100%{width:100%}}
+@keyframes splash-glow{0%,100%{box-shadow:0 0 24px #c8b28e12}50%{box-shadow:0 0 42px #c8b28e2a}}
+@keyframes splash-exit{to{opacity:0;visibility:hidden;transform:scale(1.015);pointer-events:none}}
+.startup{position:fixed;inset:0;z-index:9999;background:#111318;color:#f3f0e9;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .42s ease,visibility .42s,transform .42s ease;animation:splash-glow 2.4s ease-in-out infinite}
+.startup-out{opacity:0;visibility:hidden;transform:scale(1.015);pointer-events:none}
+.startup-mark{width:58px;height:58px;border-radius:17px;background:#c8b28e;color:#151619;display:grid;place-items:center;font:600 39px Georgia;animation:splash-mark-in .65s cubic-bezier(.2,.75,.25,1) both}
+.startup-name{font-size:20px;letter-spacing:.1px;font-weight:650;margin-top:18px;animation:hub-fade .45s .12s both}
+.startup-sub{font-size:9px;letter-spacing:2.5px;color:#969ba5;margin-top:7px;animation:hub-fade .45s .2s both}
+.startup-track{width:110px;height:2px;background:#30343d;border-radius:9px;margin-top:30px;overflow:hidden}
+.startup-track i{display:block;height:100%;width:0;background:#c8b28e;animation:splash-track .8s .1s cubic-bezier(.3,.7,.3,1) forwards}
+.startup-caption{color:#777d87;font-size:10px;margin-top:12px;letter-spacing:.2px;animation:hub-fade .5s .25s both}
+@media(prefers-reduced-motion:reduce){.startup,.startup-mark,.startup-name,.startup-sub,.startup-track i,.startup-caption{animation:none!important;transition:none!important}.startup-track i{width:100%}}
