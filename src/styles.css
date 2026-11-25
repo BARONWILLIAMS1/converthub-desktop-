@@ -65,3 +65,13 @@ button:not(:disabled):active{transform:scale(.97)}.outline:hover{border-color:#c
 .startup-track i{display:block;height:100%;width:0;background:#c8b28e;animation:splash-track .8s .1s cubic-bezier(.3,.7,.3,1) forwards}
 .startup-caption{color:#777d87;font-size:10px;margin-top:12px;letter-spacing:.2px;animation:hub-fade .5s .25s both}
 @media(prefers-reduced-motion:reduce){.startup,.startup-mark,.startup-name,.startup-sub,.startup-track i,.startup-caption{animation:none!important;transition:none!important}.startup-track i{width:100%}}
+
+/* Completion celebration: quiet, premium, not confetti overload */
+@keyframes hub-check{0%{transform:scale(.45) rotate(-18deg);opacity:0}70%{transform:scale(1.16) rotate(4deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+@keyframes hub-soft-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+.status.success{display:inline-flex;align-items:center;gap:5px;color:#83b49a}
+.success-check{animation:hub-check .42s cubic-bezier(.2,.75,.25,1) both}
+.completion-banner{display:flex;align-items:center;gap:10px;padding:13px 14px;margin:10px 0;border:1px solid #83b49a40;background:linear-gradient(100deg,var(--panel),#83b49a0c);border-radius:11px;color:#83b49a;animation:hub-rise .35s ease both}
+.completion-banner>div{flex:1}.completion-banner b{display:block;color:var(--text);font-size:11px}.completion-banner small{display:block;color:var(--muted);font-size:9px;margin-top:3px}.completion-banner>span{font-size:10px;font-variant-numeric:tabular-nums}
+.status.failed{animation:hub-soft-shake .22s ease 1}
+@media(prefers-reduced-motion:reduce){.success-check,.status.failed{animation:none!important}}
