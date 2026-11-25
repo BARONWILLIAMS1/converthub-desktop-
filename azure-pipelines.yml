@@ -1,0 +1,71 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pr:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+- job: AndroidAPK
+  displayName: Build ConvertHub Android APK
+  timeoutInMinutes: 45
+  steps:
+  - checkout: self
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+    displayName: Install Node.js 20
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '17'
+      jdkArchitectureOption: x64
+      jdkSourceOption: PreInstalled
+    displayName: Select Java 17
+  - script: npm ci
+    displayName: Install project dependencies
+  - script: npm run build:web
+    displayName: Build frontend
+  - script: npx cap add android
+    displayName: Create native Android project
+  - script: npx cap sync android
+    displayName: Sync Capacitor Android
+  - script: cd android && ./gradlew assembleDebug
+    displayName: Compile debug APK
+  - script: cp android/app/build/outputs/apk/debug/app-debug.apk ConvertHub.apk
+    displayName: Rename APK
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: ConvertHub.apk
+      artifact: ConvertHub-APK
+      publishLocation: pipeline
+    displayName: Publish APK download
+
+- job: WindowsEXE
+  displayName: Build ConvertHub Windows EXE
+  pool:
+    vmImage: windows-latest
+  timeoutInMinutes: 45
+  steps:
+  - checkout: self
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+    displayName: Install Node.js 20
+  - script: npm ci
+    displayName: Install project dependencies
+  - script: npm run build:web
+    displayName: Build frontend
+  - script: npx electron-builder --win --x64
+    displayName: Package Windows portable and installer
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: dist-installers
+      artifact: ConvertHub-Windows
+      publishLocation: pipeline
+    displayName: Publish EXE downloads
