@@ -27,7 +27,7 @@ jobs:
       jdkArchitectureOption: x64
       jdkSourceOption: PreInstalled
     displayName: Select Java 17
-  - script: npm ci
+  - script: npm install
     displayName: Install project dependencies
   - script: npm run build:web
     displayName: Build frontend
@@ -57,7 +57,7 @@ jobs:
     inputs:
       versionSpec: '20.x'
     displayName: Install Node.js 20
-  - script: npm ci
+  - script: npm install
     displayName: Install project dependencies
   - script: npm run build:web
     displayName: Build frontend
