@@ -8,7 +8,8 @@
 
 ## Prototype features
 - Drag-and-drop and multi-file queue
-- Raster image conversion to PNG, JPEG, or WebP
+- Raster image conversion to PNG, JPEG, WebP, or PDF
+- Image-to-PDF export on a centered A4 page
 - Optional image output width with aspect-ratio preservation
 - Image quality setting for JPEG/WebP
 - TXT → PDF
