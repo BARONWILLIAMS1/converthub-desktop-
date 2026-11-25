@@ -1,32 +1,38 @@
 # ConvertHub Desktop
 
-A premium, local-first file converter desktop app. Initial scaffold and feature implementation are in progress.
+ConvertHub is a privacy-first Windows desktop utility with a restrained charcoal, ivory, and champagne design system. Files are handled on-device; this prototype does not upload them.
+
+## Working features (prototype)
+- Drag-and-drop and multi-file queue
+- Raster image → PNG, JPEG, or WebP
+- Optional image output width (aspect ratio preserved)
+- Image quality setting for JPEG/WebP
+- TXT → PDF
+- PDF text extraction → TXT (only PDFs with selectable text)
+- ZIP packaging of original selected files
+- Dark/light theme
+- Windows installer packaging configuration
+
+## Limitations
+- Scanned PDFs need OCR; not included yet.
+- PDF text extraction may not preserve document layout, tables, or columns.
+- TXT → PDF uses a basic font and simple text layout; complex Unicode may not render correctly.
+- Image resizing currently uses width; output dimensions are capped to protect against unreasonable allocations.
+- Office, audio, and video conversions are not implemented yet.
+- The application is an early prototype; it has not completed a clean Windows installer smoke test.
 
 ## Development
-
-Node.js 20+ is recommended.
-
+Requires Node.js 20+.
 ```bash
 npm install
 npm run dev
 ```
 
 ## Windows build
-
 ```bash
 npm run build
 ```
+Installer output is configured for `dist-installers/`. GitHub Actions runs the Windows build and uploads the installer artifact on successful builds. Tag a version (for example `v0.1.0`) to trigger the release workflow after build verification.
 
-The Windows installer is produced by electron-builder. GitHub Actions can build the installer on Windows runners.
-
-## Privacy
-Files are processed locally in the app. No upload service is configured.
-
-## Supported in this initial version
-- Image conversions: PNG, JPEG, WebP
-- Image resizing and quality compression
-- Text files to PDF
-- PDF text extraction to TXT (where text is present)
-- ZIP archive creation from selected files
-
-Additional document, audio, and video formats are planned and must be implemented/tested before being advertised as supported.
+## Privacy and security
+No server or upload endpoint is configured. Electron is configured with context isolation, sandboxing, disabled Node integration, and navigation restrictions. Keep untrusted files in mind: parser bugs are possible, and this prototype should not be considered security-audited.
