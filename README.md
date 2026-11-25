@@ -16,6 +16,7 @@
 - PDF text extraction → TXT (selectable-text PDFs only)
 - Merge multiple PDFs into one file
 - Split PDFs into one-page files, packaged as ZIP
+- Render PDF pages to PNG images, packaged as ZIP
 - ZIP packaging of selected original files
 - Dark/light theme
 
