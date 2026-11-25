@@ -59,7 +59,7 @@ function App(){
  }
  async function splitPdfs(){
   const selected=files.filter(f=>ext(f.name)==='pdf');if(!selected.length)return;setBusy(true);
-  try{const archive=new JSZip();for(const item of selected){const source=await PDFDocument.load(await item.file.arrayBuffer());const folder=archive.folder(item.name.replace(/\\.pdf$/i,''));for(let i=0;i<source.getPageCount();i++){const out=await PDFDocument.create();const [page]=await out.copyPages(source,[i]);out.addPage(page);folder.file('page-'+String(i+1).padStart(3,'0')+'.pdf',await out.save());}}save(await archive.generateAsync({type:'blob'}),'ConvertHub-PDF-Split.zip');}
+  try{const archive=new JSZip();for(const item of selected){const source=await PDFDocument.load(await item.file.arrayBuffer());const folder=archive.folder(item.name.replace(/\.pdf$/i,''));for(let i=0;i<source.getPageCount();i++){const out=await PDFDocument.create();const [page]=await out.copyPages(source,[i]);out.addPage(page);folder.file('page-'+String(i+1).padStart(3,'0')+'.pdf',await out.save());}}save(await archive.generateAsync({type:'blob'}),'ConvertHub-PDF-Split.zip');}
   catch(error){alert('Split failed: '+error.message);}finally{setBusy(false);}
  }
  async function convert(item){const file=item.file,e=ext(file.name),base=file.name.replace(/\.[^.]+$/,'');
