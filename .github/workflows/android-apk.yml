@@ -32,18 +32,20 @@ jobs:
         run: npx cap sync android
       - name: Build debug APK
         run: cd android && ./gradlew assembleDebug
+      - name: Rename APK for delivery
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk ConvertHub.apk
       - name: Upload APK for testing
         uses: actions/upload-artifact@v4
         with:
           name: ConvertHub-Android-APK
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: ConvertHub.apk
           if-no-files-found: error
           retention-days: 30
       - name: Publish APK to GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: android/app/build/outputs/apk/debug/app-debug.apk
+          files: ConvertHub.apk
           name: ConvertHub ${{ github.ref_name }}
           body: |
             ConvertHub Android test APK.
