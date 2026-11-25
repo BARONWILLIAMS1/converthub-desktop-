@@ -1,0 +1,6 @@
+{
+  "appId": "com.binarystudios.converthub",
+  "appName": "ConvertHub",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

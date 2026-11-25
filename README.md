@@ -1,38 +1,49 @@
-# ConvertHub Desktop
+# ConvertHub
 
-ConvertHub is a privacy-first Windows desktop utility with a restrained charcoal, ivory, and champagne design system. Files are handled on-device; this prototype does not upload them.
+**ConvertHub — By Binary Studios** is a premium, privacy-first file conversion workspace.
 
-## Working features (prototype)
+## Platform builds
+- **Windows:** NSIS installer (`ConvertHub-Setup-0.1.0.exe`) — Windows CI workflow.
+- **Android test APK:** build workflow creates a debug APK for phone testing. Open the [Android APK workflow](https://github.com/BARONWILLIAMS1/converthub-desktop-/actions/workflows/android-apk.yml), select the latest successful run, and download the `ConvertHub-Android-APK` artifact. GitHub requires you to be signed in to download workflow artifacts. Tag releases (`v*`) also attach the APK to the GitHub Release.
+
+## Prototype features
 - Drag-and-drop and multi-file queue
-- Raster image → PNG, JPEG, or WebP
-- Optional image output width (aspect ratio preserved)
+- Raster image conversion to PNG, JPEG, or WebP
+- Optional image output width with aspect-ratio preservation
 - Image quality setting for JPEG/WebP
 - TXT → PDF
-- PDF text extraction → TXT (only PDFs with selectable text)
-- ZIP packaging of original selected files
+- PDF text extraction → TXT (selectable-text PDFs only)
+- ZIP packaging of selected original files
 - Dark/light theme
-- Windows installer packaging configuration
 
-## Limitations
-- Scanned PDFs need OCR; not included yet.
-- PDF text extraction may not preserve document layout, tables, or columns.
-- TXT → PDF uses a basic font and simple text layout; complex Unicode may not render correctly.
-- Image resizing currently uses width; output dimensions are capped to protect against unreasonable allocations.
-- Office, audio, and video conversions are not implemented yet.
-- The application is an early prototype; it has not completed a clean Windows installer smoke test.
+## Current limitations
+This is an early prototype. Scanned PDFs need OCR; PDF text extraction does not preserve layout reliably; TXT→PDF uses simple layout and basic fonts. Office, audio, video, advanced PDF editing, OCR and most archive formats are not implemented yet. Do not assume a format is supported just because it appears on the roadmap.
 
 ## Development
-Requires Node.js 20+.
+Node.js 20+:
 ```bash
 npm install
 npm run dev
 ```
 
-## Windows build
+## Windows
 ```bash
 npm run build
 ```
-Installer output is configured for `dist-installers/`. GitHub Actions runs the Windows build and uploads the installer artifact on successful builds. Tag a version (for example `v0.1.0`) to trigger the release workflow after build verification.
+Installer is output to `dist-installers/`.
+
+## Android local build
+```bash
+npm install
+npm run build:web
+npx cap add android
+npx cap sync android
+cd android
+./gradlew assembleDebug
+```
+APK output: `android/app/build/outputs/apk/debug/app-debug.apk`.
 
 ## Privacy and security
-No server or upload endpoint is configured. Electron is configured with context isolation, sandboxing, disabled Node integration, and navigation restrictions. Keep untrusted files in mind: parser bugs are possible, and this prototype should not be considered security-audited.
+No server or upload endpoint is configured. Electron uses context isolation, sandboxing, disabled Node integration and navigation restrictions. Android preview is a WebView-based app that runs the frontend locally. File processing support varies by format and parser.
+
+---
