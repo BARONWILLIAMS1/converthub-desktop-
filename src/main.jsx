@@ -16,9 +16,9 @@ function App(){
  async function imageConvert(file,base){
   const url=URL.createObjectURL(file),img=new Image();
   try{await new Promise((ok,no)=>{img.onload=ok;img.onerror=()=>no(new Error('Could not decode this image.'));img.src=url;});
-   const targetWidth=Math.max(1,Math.min(100000,width?Number(width):img.naturalWidth));if(width&&(!Number.isFinite(targetWidth)||targetWidth<=0))throw new Error('Enter a valid width in pixels.');
+   const targetWidth=Math.max(1,Math.min(16000,width?Number(width):img.naturalWidth));if(width&&(!Number.isFinite(targetWidth)||targetWidth<=0))throw new Error('Enter a valid width in pixels.');
    const ratio=targetWidth/img.naturalWidth,canvas=document.createElement('canvas');canvas.width=targetWidth;canvas.height=Math.max(1,Math.round(img.naturalHeight*ratio));
-   const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas unavailable.');
+   if(canvas.width*canvas.height>40000000){const factor=Math.sqrt(40000000/(canvas.width*canvas.height));canvas.width=Math.max(1,Math.floor(canvas.width*factor));canvas.height=Math.max(1,Math.floor(canvas.height*factor));}\n   const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas unavailable.');
    if(format==='jpg') {ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);}
    ctx.drawImage(img,0,0,canvas.width,canvas.height);
    const mime={png:'image/png',jpg:'image/jpeg',webp:'image/webp'}[format];
