@@ -14,11 +14,13 @@
 - Image quality setting for JPEG/WebP
 - TXT → PDF
 - PDF text extraction → TXT (selectable-text PDFs only)
+- Merge multiple PDFs into one file
+- Split PDFs into one-page files, packaged as ZIP
 - ZIP packaging of selected original files
 - Dark/light theme
 
 ## Current limitations
-This is an early prototype. Scanned PDFs need OCR; PDF text extraction does not preserve layout reliably; TXT→PDF uses simple layout and basic fonts. Office, audio, video, advanced PDF editing, OCR and most archive formats are not implemented yet. Do not assume a format is supported just because it appears on the roadmap.
+This is an early prototype. Scanned PDFs need OCR; PDF text extraction does not preserve layout reliably; TXT→PDF uses simple layout and basic fonts. Office, audio, video, PDF OCR, page reordering/rotation, Office, audio, video and most archive formats are not implemented yet. Do not assume a format is supported just because it appears on the roadmap.
 
 ## Development
 Node.js 20+:
